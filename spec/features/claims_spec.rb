@@ -18,4 +18,21 @@ feature "Claiming a Donut Day" do
     expect(claim.user).to be_present
     expect(claim.date).to be_today
   end
+
+  scenario "A user can claim today as a donut day" do
+    user = create(:user)
+    sign_in_on_github(user)
+
+    visit root_path
+    donuts_button.click
+
+    expect(current_path).to eq(root_path)
+    expect(donuts_button).to be_disabled
+
+    expect(Claim.count).to eq(1)
+
+    claim = Claim.last
+    expect(claim.user).to be_present
+    expect(claim.date).to be_today
+  end
 end
