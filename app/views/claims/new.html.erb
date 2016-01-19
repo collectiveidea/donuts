@@ -1,1 +1,1 @@
-<%= button_to "Donuts!", claim_path, method: :get, disabled: current_user.claimed_today? %>
+<%= button_to "Donuts!", claim_path, method: :get, disabled: current_user.try(:claimed_today?), class: "claim-button" %>
