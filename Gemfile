@@ -18,6 +18,12 @@ gem "jquery-rails"
 gem "sass-rails"
 gem "uglifier"
 
+# Configuration
+gem "figaro"
+
+# Authentication
+gem "omniauth-github"
+
 group :development, :test do
   gem "capybara"
   gem "database_cleaner"

@@ -14,3 +14,6 @@
 
 # Ignore persisted RSpec state
 /spec/examples.txt
+
+# Ignore application configuration
+/config/application.yml
