@@ -10,7 +10,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.claiming_today
+    joins(:claims).where(claims: { date: Date.current }).uniq
+  end
+
   def claimed_today?
     claims.where(date: Date.current).exists?
+  end
+
+  def display_name
+    name || "@#{github_login}"
+  end
+
+  def github_url
+    "https://github.com/#{github_login}"
   end
 end

@@ -37,7 +37,7 @@ feature "Claiming a Donut Day" do
   end
 
   scenario "A visitor can double down on donuts" do
-    create(:claim, date: Date.current)
+    claim = create(:claim, date: Date.current)
     sign_in_on_github
 
     visit root_path
@@ -54,11 +54,14 @@ feature "Claiming a Donut Day" do
   end
 
   scenario "A user can double down on donuts" do
-    create(:claim, date: Date.current)
+    claim = create(:claim, date: Date.current)
     user = create(:user)
     sign_in_on_github(user)
 
     visit root_path
+
+    expect(page).to have_content(claim.user.display_name)
+    expect(donuts_button).not_to be_disabled
     donuts_button.click
 
     expect(current_path).to eq(root_path)
