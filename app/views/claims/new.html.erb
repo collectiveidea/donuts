@@ -1,6 +1,19 @@
-<% if @users_claiming_today.any? %>
-  <%= @users_claiming_today.map { |u| link_to(u.display_name, u.github_url) }.to_sentence.html_safe %>
-  <%= @users_claiming_today.one? ? "is" : "are" %> already briging in donuts today!
-<% end %>
-
-<%= button_to "Donuts!", claim_path, method: :get, disabled: current_user.try(:claimed_today?), class: "claim-button" %>
+<div class="intro">
+  <% if @users_claiming_today.any? %>
+    <div class="names">
+      <%= linked_names(@users_claiming_today) %>
+    </div>
+    got donuts today!
+  <% else %>
+    Nobody’s gotten donuts today…
+  <% end %>
+</div>
+<div class="button-container">
+  <% if current_user.try(:claimed_today?) %>
+    <button class="button" disabled="disabled">Thank You!</button>
+  <% elsif @users_claiming_today.any? %>
+    <%= button_to "Me too!", claim_path, method: :get, class: "button" %>
+  <% else %>
+    <%= button_to "I’m Getting Donuts!", claim_path, method: :get, class: "button" %>
+  <% end %>
+</div>

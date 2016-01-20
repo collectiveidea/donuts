@@ -5,13 +5,13 @@ class User < ActiveRecord::Base
 
   def self.from_auth(auth)
     User.find_or_initialize_by(github_login: auth.info.nickname).tap do |user|
-      user.name = auth.info.name.presence
+      user.name = auth.info.name.presence.try(:squish)
       user.save!
     end
   end
 
   def self.claiming_today
-    joins(:claims).where(claims: { date: Date.current }).uniq
+    Claim.today.includes(:user).map(&:user).uniq
   end
 
   def claimed_today?
@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    name || "@#{github_login}"
+    match = name.to_s.match(/\A(?<first_name>[^ ]+) [^ ]+\z/)
+    match && match[:first_name] || name || "@#{github_login}"
   end
 
   def github_url

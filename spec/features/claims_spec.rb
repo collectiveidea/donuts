@@ -1,6 +1,6 @@
 feature "Claiming a Donut Day" do
   def donuts_button
-    find(".claim-button")
+    find(".button")
   end
 
   scenario "A visitor can claim today as a donut day" do
