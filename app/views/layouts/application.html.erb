@@ -7,6 +7,14 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Boogaloo|Asap:400,700" rel="stylesheet" type="text/css">
+    <meta property="og:title" content="Donuts">
+    <meta property="og:image" content="<%= asset_url("share.png") %>">
+    <meta name="twitter:label1" value="Who is bringing the donuts?">
+    <% if @users_claiming_today.any? %>
+      <meta name="twitter:data1" value="<% users_list(@users_claiming_today) %>">
+    <% else %>
+      <meta name="twitter:data1" value="No one.">
+    <% end %>
   </head>
   <body>
     <div class="middle">
