@@ -3,5 +3,10 @@ before_script: bin/setup
 branches: master
 cache: bundler
 language: ruby
+notifications:
+  webhooks:
+    urls:
+      - https://buildlight.collectiveidea.com/
+    on_start: always
 rvm: 2.3.1
 sudo: false
