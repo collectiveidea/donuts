@@ -24,6 +24,8 @@ gem "figaro"
 # Authentication
 gem "omniauth-github"
 
+gem "active_model_serializers"
+
 group :development, :test do
   gem "capybara"
   gem "database_cleaner"

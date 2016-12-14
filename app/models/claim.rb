@@ -3,7 +3,5 @@ class Claim < ActiveRecord::Base
 
   validates :user, :date, presence: true, strict: true
 
-  def self.today
-    where(date: Date.current).order(:created_at)
-  end
+  scope :today, -> { where(date: Date.current).order(created_at: :asc) }
 end

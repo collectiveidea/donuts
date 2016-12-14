@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   def display_name
     match = name.to_s.match(/\A(?<first_name>[^ ]+) [^ ]+\z/)
-    match && match[:first_name] || name || "@#{github_login}"
+    match && match[:first_name] || name.presence || "@#{github_login}"
   end
 
   def github_url
