@@ -7,4 +7,12 @@ Rails.application.routes.draw do
   get "claim" => "claims#create"
 
   root to: "claims#new"
+
+  namespace :api do
+    namespace :v1 do
+      resources :claims, only: [] do
+        get :today, on: :collection
+      end
+    end
+  end
 end
