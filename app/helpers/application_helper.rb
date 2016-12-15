@@ -1,12 +1,11 @@
 module ApplicationHelper
   def linked_names(users)
-    users.map { |user|
+    users.map do |user|
       link_to user.display_name, user.github_url, target: "_blank"
-    }.to_sentence.html_safe
+    end.to_sentence.html_safe
   end
+
   def users_list(users)
-    users.map { |user|
-      user.display_name
-    }.to_sentence.html_safe
+    users.map(&:display_name).to_sentence.html_safe
   end
 end
